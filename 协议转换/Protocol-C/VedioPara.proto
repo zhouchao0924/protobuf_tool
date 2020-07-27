@@ -1,0 +1,52 @@
+syntax = "proto3";
+option go_package = ".;dh_grpc";
+service Process {
+    rpc Process3d (Process3dRequest) returns (Process3dReply) {
+    }
+    rpc Process3dOnedim (Process3dRequest) returns (Process3dReplyOnedim) {
+    }
+}
+
+message Process3dRequest {
+    int32 sample_rate = 1;
+    bytes wav = 2;
+    float ratio = 3;
+}
+
+
+message Point3D {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Point3Ds {
+    repeated Point3D points = 1;
+}
+message Point3Dss {
+    repeated Point3Ds points = 1;
+}
+
+message Process3dReply {
+    int32 code = 1;
+    repeated int32 indPoints = 2;
+    repeated Point3Dss points = 3;
+}
+message Animation {
+    float time = 1;
+    string name = 2;
+}
+message Expression {
+    float time = 1;
+    string name = 2;
+}
+message Process3dReplyOnedim {
+    int32 code = 1;
+    bytes indPoints = 2;
+    bytes points = 3;
+    repeated int32 shape=4;
+    string audio = 5;
+    float startTime = 6;
+    repeated Animation animations = 7;
+    repeated Expression expressions = 8;
+}

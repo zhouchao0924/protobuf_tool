@@ -1,0 +1,78 @@
+syntax = "proto3";
+option go_package = ".;dh_grpc";
+service Process {
+    rpc Process3d (Process3dRequest) returns (Process3dReply) {
+    }
+    rpc Process3dOnedim (Process3dRequest) returns (Process3dReplyOnedim) {
+    }
+}
+
+message Process3dRequest {
+    int32 sample_rate = 1;
+    bytes wav = 2;
+    float ratio = 3;
+}
+
+
+message Point3D {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Point3Ds {
+    repeated Point3D points = 1;
+}
+message Point3Dss {
+    repeated Point3Ds points = 1;
+}
+
+message Process3dReply {
+    int32 code = 1;
+    repeated int32 indPoints = 2;
+    repeated Point3Dss points = 3;
+}
+message Animation {
+    float time = 1;
+    string name = 2;
+}
+message Expression {
+    float time = 1;
+    string name = 2;
+}
+message Resolution {
+    int32 width = 1;
+    int32 height = 2;
+}
+message Mode {
+    string name = 1;
+    string url = 2;
+}
+message BackgroundImage {
+    string name = 1;
+    string url = 2;
+}
+message BackgroundMusic {
+    string name = 1;
+    string url = 2;
+}
+message Wav {
+    string content = 1;
+    string url = 2;
+}
+message Process3dReplyOnedim {
+    string taskId = 1;
+    int32 code = 2;
+    bytes indPoints = 3;
+    bytes points = 4;
+    repeated int32 shape=5;
+    string audio = 6;
+    float startTime = 7;
+    repeated Animation animations = 8;
+    repeated Expression expressions = 9;
+    Resolution resolution = 10;
+    Mode mode = 11;
+    BackgroundImage backgroundImage = 12;
+    BackgroundMusic backgroundMusic = 13;
+    Wav Wav = 14;
+}

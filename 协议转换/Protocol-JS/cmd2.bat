@@ -1,0 +1,1 @@
+pbts -o dh.d.ts dh.js
